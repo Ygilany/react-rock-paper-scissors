@@ -21,7 +21,6 @@ const App = ()=>{
             ? <WelcomeScreen username={username} setUsername={setUsername} onPlay={onPlayButtonClick}/>
             : <GameScreen username={username}/>
           }
-          extraneous
         </div>
       </div>
     </>
