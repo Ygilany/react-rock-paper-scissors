@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import GameScreen from './components/GameScreen';
+import WelcomeScreen from './components/WelcomeScreen';
 
-function App() {
+const App = ()=>{
+  const [username, setUsername] = useState('');
+  const [gameStart, setGameStart] = useState(false);
+
+  const onPlayButtonClick = () => {
+    setGameStart(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <>
+      <h1>Rock Paper Scissors</h1>
+      <div className="container">
+        <div className="row">
+          {
+            !gameStart 
+            ? <WelcomeScreen username={username} setUsername={setUsername} onPlay={onPlayButtonClick}/>
+            : <GameScreen username={username}/>
+          }
+          extraneous
+        </div>
+      </div>
+    </>
+)};
 
 export default App;
