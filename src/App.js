@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import GameScreen from './components/GameScreen';
+import GameScreen from './components/GameScreen2';
 import WelcomeScreen from './components/WelcomeScreen';
 
 const App = ()=>{
@@ -11,6 +11,10 @@ const App = ()=>{
     setGameStart(true);
   };
 
+  const onGameReset = () => {
+    setGameStart(false);
+  };
+
   return (
     <>
       <h1>Rock Paper Scissors</h1>
@@ -19,7 +23,7 @@ const App = ()=>{
           {
             !gameStart 
             ? <WelcomeScreen username={username} setUsername={setUsername} onPlay={onPlayButtonClick}/>
-            : <GameScreen username={username}/>
+            : <GameScreen username={username} onReset={onGameReset}/>
           }
         </div>
       </div>
