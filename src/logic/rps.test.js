@@ -30,9 +30,9 @@ describe(`RockPaperScissors class`, function () {
       mathRandomSpy.mockImplementationOnce(() => 0.5);
       mathRandomSpy.mockImplementationOnce(() => 0.9);
       const game = new RockPaperScissors();
-      const retvals = Array(3).fill(0).map(i => game.generateCPUResponse());
+      const returnValues = Array(3).fill(0).map(i => game.generateCPUResponse());
       const expected = [ `rock`, `paper`,`scissors` ];
-      expect(retvals).toEqual(expect.arrayContaining(expected)); // TODO: use Mocks and Spies instead
+      expect(returnValues).toEqual(expect.arrayContaining(expected)); // TODO: use Mocks and Spies instead
     });
   });
 });
