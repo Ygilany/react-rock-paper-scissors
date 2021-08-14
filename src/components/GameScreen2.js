@@ -5,14 +5,12 @@ import { ScoreTally } from "./ScoreTally";
 
 const GameScreen = ({ username, onReset }) => {
   const game = useMemo(() => new RockPaperScissors(username), [username]);
-  const [userSelection, setUserSelection] = React.useState(`rock`);
   const [userScore, setUserScore] = React.useState(0);
   const [CPUScore, setCPUScore] = React.useState(0);
   const [tieScore, setTieScore] = React.useState(0);
 
-  const handleRPSOptionSelection = (event) => {
-    setUserSelection(event.target.value);
-    game.play(userSelection);
+  const handleRPSOptionSelection = (value) => {
+    game.play(value);
     setUserScore(game.getScore().user);
     setCPUScore(game.getScore().cpu);
     setTieScore(game.getScore().tie);
@@ -28,9 +26,9 @@ const GameScreen = ({ username, onReset }) => {
         <ScoreTally username={username} userScore={userScore} CPUScore={CPUScore} tieScore={tieScore} />
       <form id="game-form">
         <div className="form-group">
-          <button type="button" onClick={()=>handleRPSOptionSelection({target: {value: 'rock'}})}>Rock</button>
-          <button type="button" onClick={()=>handleRPSOptionSelection({target: {value: 'paper'}})}>Paper</button>
-          <button type="button" onClick={()=>handleRPSOptionSelection({target: {value: 'scissors'}})}>Scissors</button>
+          <button type="button" onClick={()=>handleRPSOptionSelection('rock')}>Rock</button>
+          <button type="button" onClick={()=>handleRPSOptionSelection('paper')}>Paper</button>
+          <button type="button" onClick={()=>handleRPSOptionSelection('scissors')}>Scissors</button>
         </div>
       </form>
       <p id="game-history"></p>

@@ -1,16 +1,16 @@
 import { cleanup, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { mockRandom, resetMockRandom } from 'jest-mock-random';
 import GameScreen from './GameScreen2';
-const mathRandomSpy = jest.spyOn(Math, `random`);
 
 
-describe('<GameScreen2a />', () => {
+describe('<GameScreen2 />', () => {
   const mockUsername = `some name`;
   const mockResetGame = jest.fn().mockName(`resetGame`);
 
   afterEach(() => {
     cleanup();
-    mathRandomSpy.mockReset();
+    resetMockRandom();
   });
 
   test('renders correctly', () => {
@@ -31,29 +31,30 @@ describe('<GameScreen2a />', () => {
   });
 
   test('updates score tally when tie', () => {
-    mathRandomSpy.mockImplementationOnce(() => 0.1);
+    mockRandom(0.1);
 
     const {
       getByRole,
       getByText
     } = render(<GameScreen username={mockUsername} onReset={mockResetGame}/>);
     userEvent.click(getByRole('button', {name: /rock/i}));
-    getByText(`${mockUsername}: 0 v CPU: 0 - Tie: 1`);
+    
+    getByText((`${mockUsername}: 0 v CPU: 0 - Tie: 1`));
   });
 
   test('updates score tally when user wins', () => {
-    mathRandomSpy.mockImplementationOnce(() => 0.1);
+    mockRandom(0.1);
 
     const {
       getByRole,
       getByText
     } = render(<GameScreen username={mockUsername} onReset={mockResetGame}/>);
     userEvent.click(getByRole('button', {name: /paper/i}));
-    getByText(`${mockUsername}: 1 v CPU: 0 - Tie: 0`);
+    getByText(new RegExp(`${mockUsername}: 1 v cpu: 0 - tie: 0`, `i`));
   });
 
   test('updates score tally when user loses', () => {
-    mathRandomSpy.mockImplementationOnce(() => 0.1);
+    mockRandom(0.1);
 
     const {
       getByRole,
@@ -66,11 +67,9 @@ describe('<GameScreen2a />', () => {
   test('resets game when reset button is clicked', () => {
     const {
       getByRole,
-      debug
     } = render(<GameScreen username={mockUsername} onReset={mockResetGame}/>);
-    debug();
-    // userEvent.click(getByRole('button', {name: 'Reset Game'}));
-    // expect(mockResetGame).toHaveBeenCalled();
+    userEvent.click(getByRole('button', {name: 'Reset Game'}));
+    expect(mockResetGame).toHaveBeenCalled();
   });
 
 });
