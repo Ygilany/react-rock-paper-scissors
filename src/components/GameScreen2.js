@@ -26,9 +26,9 @@ const GameScreen = ({ username, onReset }) => {
         <ScoreTally username={username} userScore={userScore} CPUScore={CPUScore} tieScore={tieScore} />
       <form id="game-form">
         <div className="form-group">
-          <button type="button" onClick={()=>handleRPSOptionSelection('rock')}>Rock</button>
-          <button type="button" onClick={()=>handleRPSOptionSelection('paper')}>Paper</button>
-          <button type="button" onClick={()=>handleRPSOptionSelection('scissors')}>Scissors</button>
+          <button className="btn btn-outline-primary" type="button" onClick={()=>handleRPSOptionSelection('rock')}>Rock</button>
+          <button className="btn btn-outline-primary" type="button" onClick={()=>handleRPSOptionSelection('paper')}>Paper</button>
+          <button className="btn btn-outline-primary" type="button" onClick={()=>handleRPSOptionSelection('scissors')}>Scissors</button>
         </div>
       </form>
       <p id="game-history"></p>
