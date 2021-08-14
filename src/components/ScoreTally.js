@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 export const ScoreTally = ({ username, userScore, CPUScore, tieScore }) => {
   return (
-    <div id="score-tally">
+    <div id="score-tally" data-testid="score-tally">
       <p id="score">
-        {username}: {userScore} v CPU: {CPUScore} - Tie: {tieScore}
+        {`${username}: ${userScore} v CPU: ${CPUScore} - Tie: ${tieScore}`}
       </p>
     </div>
   );
