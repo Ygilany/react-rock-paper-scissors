@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import RockPaperScissors from "../logic/rps";
 import { ScoreTally } from "./ScoreTally";
 
-const GameScreen = ({ username }) => {
+const GameScreen = ({ username, onReset }) => {
   const game = useMemo(() => new RockPaperScissors(username), [username]);
   const [userSelection, setUserSelection] = React.useState(`rock`);
   const [userScore, setUserScore] = React.useState(0);
@@ -19,6 +19,10 @@ const GameScreen = ({ username }) => {
     setUserScore(game.getScore().user);
     setCPUScore(game.getScore().cpu);
     setTieScore(game.getScore().tie);
+  }
+
+  const handleResetGame = () => {
+    onReset();
   }
 
   return (
@@ -45,7 +49,7 @@ const GameScreen = ({ username }) => {
         </button>
       </form>
       <p id="game-history"></p>
-      <button id="reset-game-button" className="btn btn-secondary">
+      <button id="reset-game-button" className="btn btn-secondary" onClick={handleResetGame}>
         Reset Game
       </button>
     </div>
@@ -54,6 +58,7 @@ const GameScreen = ({ username }) => {
 
 GameScreen.propTypes = {
   username: PropTypes.string.isRequired,
+  onReset: PropTypes.func.isRequired
 };
 
 export default GameScreen;
